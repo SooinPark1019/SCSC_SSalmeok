@@ -60,11 +60,9 @@ struct UFrollback{
 
             int u = cur.u;
             int v = cur.v;
-            // par[u] = cur.pu;
             par[v] = cur.pv;
             sz[u] = cur.szu;
             rank[u] = cur.ru;
-            // sz[v] = cur.szv;
 
             trace.pop_back();
         }
