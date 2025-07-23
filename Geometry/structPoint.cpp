@@ -22,4 +22,4 @@ struct P2{
     bool operator== (const P2 &p) const{ return x==p.x && y==p.y;}
 };
 using PT = P2<ll>;
-using polygon = vector<P2<ll>>;
+using polygon = vector<PT>;
