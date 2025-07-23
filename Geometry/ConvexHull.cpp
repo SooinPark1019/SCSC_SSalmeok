@@ -8,13 +8,7 @@ polygon convex_hull(polygon v){
     if (n < 3) return v;
 
     polygon ans(2*n);
-
-    sort(all(v),
-        [](const PT &p1, const PT &p2) -> bool{
-            if (p1.x == p2.x) return p1.y < p2.y;
-            return p1.x < p2.x;
-        }
-    );
+    sort(all(v));
     
     for (int i = 0; i < n; i++){
         while (k >= 2 && ccw(ans[k-2], ans[k-1], v[i]) < 0){
