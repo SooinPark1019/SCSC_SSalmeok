@@ -1,38 +1,31 @@
-struct point{
-    long long x,y;
-};
-long long ccw(point A, point B, point C){
-    long long temp=A.x*B.y+B.x*C.y+C.x*A.y-A.y*B.x-B.y*C.x-C.y*A.x;
-    return temp;
-}
-point S[100005];
-int stackpointer=0;
-vector<point> V;
-bool compare1(point A, point B){
-    if(A.y==B.y) return A.x<B.x;
-    return A.y<B.y;
-}
-bool compare2(point A, point B){
-    long long a=ccw(V[0], A, B);
-    if(a==0){
-        return (A.x-V[0].x)*(A.x-V[0].x)+(A.y-V[0].y)*(A.y-V[0].y)<(B.x-V[0].x)*(B.x-V[0].x)+(B.y-V[0].y)*(B.y-V[0].y);
-    }
-    return a>0;
-}
-int main(){
-    int N;
-    for(long long i=0, a, b; i<N; i++) { cin >> a >> b; V.push_back({a, b}); }
-    sort(V.begin(), V.end(), compare1); sort(V.begin()+1, V.end(), compare2);
-    S[stackpointer]=V[0];
-    stackpointer++;
-    S[stackpointer]=V[1];
-    stackpointer++;
-    for(int i=2; i<N; i++){
-        while((stackpointer>=2)&&(ccw(S[stackpointer-2], S[stackpointer-1], V[i])<=0)){
-            stackpointer--;
+polygon convex_hull(polygon v){
+    // monotone chain
+    // change ccw(~~~) < 0 to ccw(~~~) <= 0 to remove colinear pts
+
+    int n = v.size();
+    int k = 0;
+
+    if (n < 3) return v;
+
+    polygon ans(2*n);
+    sort(all(v));
+    
+    for (int i = 0; i < n; i++){
+        while (k >= 2 && ccw(ans[k-2], ans[k-1], v[i]) < 0){
+            k--;
         }
-        S[stackpointer]=V[i];
-        stackpointer++;
+        ans[k] = v[i];
+        k++;
     }
-    return 0;
+
+    for (int i = n- 1, t = k + 1; i > 0; i--){
+        while (k >= t && ccw(ans[k-2], ans[k-1], v[i-1]) < 0){
+            k--;
+        }
+        ans[k] = v[i-1];
+        k++;
+    }
+
+    ans.resize(k-1);
+    return ans;
 }
