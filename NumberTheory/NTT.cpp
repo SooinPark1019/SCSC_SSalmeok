@@ -1,3 +1,5 @@
+// TODO : ntt 소수 리스트 추가?
+
 void ntt(vector<ll> &P, bool inverse, ll g){
     int n = P.size();
     if (n == 1) return;
