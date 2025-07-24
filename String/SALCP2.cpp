@@ -63,3 +63,22 @@ int safind(string& s, string& t) { // s의 SA에서 t가 등장하는 위치 / O
     }
     return p2;
 }
+
+int main() { // 찾기(1786) 코드
+    string s; getline(cin, s);
+    string t; getline(cin, t);
+
+    s.push_back('#');
+    t.push_back(1);
+
+    salcp(s);
+    int x = safind(s, t);
+    t.back() = 127;
+    int y = safind(s, t);
+
+    vector<int> A;
+    for(int i=0; i<s.size(); i++) if(x <= POS[i] && POS[i] < y) A.push_back(i+1);
+    
+    cout << A.size() << endl;
+    for(int a : A) cout << a << ' ';
+}
