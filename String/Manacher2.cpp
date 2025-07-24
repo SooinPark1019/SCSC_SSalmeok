@@ -12,3 +12,15 @@ vector<int> manacher(string& A) {
     }
     return P;
 }
+
+int main() { // 팰린드롬 부분 문자열의 개수
+
+    string s; cin >> s;
+    vector<int> A = manacher(s);
+    long long ans = 0;
+    for(int i=0; i<A.size(); i+=2) ans += A[i]+1>>1;
+    for(int i=1; i<A.size(); i+=2) ans += A[i]>>1;
+
+    cout << ans;
+
+}

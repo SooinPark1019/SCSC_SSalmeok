@@ -50,3 +50,23 @@ vector<int> aho_match(string& s) { // 매칭, O(M)
     }
     return R;
 }
+
+
+int main() { // 문자열 집합 판별 : S에 t의 부분문자열이 나오는지 판별
+    cin.tie(0)->sync_with_stdio(0);
+
+
+    int n; cin >> n;
+    vector<string> S(n); for(int i=0; i<n; i++) cin >> S[i];
+    aho_pre(S);
+
+    int m; cin >> m;
+    for(int i=0; i<m; i++) {
+        string t; cin >> t;
+        vector<int> L = aho_match(t);
+        cout << (*max_element(L.begin(), L.end()) != -1 ? "YES" : "NO") << '\n';
+    }
+    
+
+
+}
