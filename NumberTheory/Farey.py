@@ -13,7 +13,7 @@ def nextTerm(n, a, b):
     return [c, d]
 def farey(n, K):
     # return K-th term of farey sequence
-    # -1 is doesn't exist
+    # -1 if doesn't exist
     a, b = map(int, input().split())
     c, d = nextTerm(n, a, b)
 
