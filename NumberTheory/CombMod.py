@@ -31,10 +31,9 @@ def comb_mod_prime(n, k, p):
     a = fact_mod_prime(n, p)
     b = fact_mod_prime(k, p)
     c = fact_mod_prime(n-k, p)
-    mod = p
 
     t = a[0] - b[0] - c[0]
-    n = a[1] * pow(b[1], -1, mod) * pow(c[1], -1, mod)
+    n = a[1] * pow(b[1], -1, p) * pow(c[1], -1, p)
 
     return [t, n]
 
