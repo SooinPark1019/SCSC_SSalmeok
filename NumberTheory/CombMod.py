@@ -2,8 +2,8 @@ def fact_mod_prime(n, p):
     # this method is useful when p is small
     # O(log n)
 
-    # n! = p^M r (r < p)
-    # return [M, r]
+    # n! = p^M r
+    # return [M, r%p]
 
     # fact[i] = i! % p
     # i < p
@@ -25,8 +25,8 @@ def fact_mod_prime(n, p):
     k += K[0]
     return [k, m]
 def comb_mod_prime(n, k, p):
-    # nCk = p^M r (m < p)
-    # return [M, r]
+    # nCk = p^M r
+    # return [M, r % p]
 
     a = fact_mod_prime(n, p)
     b = fact_mod_prime(k, p)
@@ -39,16 +39,13 @@ def comb_mod_prime(n, k, p):
 
 def fact_mod_primetower(n, p, e):
     # this method is useful when p is small
+    # O(p^e + log n)
 
-    # n! = (p^e)^M r
-    # r < p^e
-    # return [M, r]
+    # n! = p^M r
+    # return [M, r % p^e]
 
-    # fact[i] = i! % p
-    # i < p
-
-    # val[i] = (\prod_{(n, p) = 1, n \in [1, i]} n) % p^e
-    # 0 <= i < p^e
+    # fact[i] = i! % p, i < p
+    # val[i] = (\prod_{(n, p) = 1, n \in [1, i]} n) % p^e, i < p^e
 
     if n < p:
         return[0, fact[n]]
@@ -68,14 +65,14 @@ def fact_mod_primetower(n, p, e):
     k += K[0]
     return [k, m]
 def comb_mod_primetower(n, k, p, e):
-    # nCk % p^e
+    # nCk = p^M r
+    # return [M, r % p^e]
     a = fact_mod_primetower(n, p, e)
     b = fact_mod_primetower(k, p, e)
     c = fact_mod_primetower(n-k, p, e)
     mod = p**e
 
     t = a[0] - b[0] - c[0]
-    n = a[1] * pow(b[1], -1, mod) * pow(c[1], -1, mod)
+    n = a[1] * pow(b[1], -1, mod) * pow(c[1], -1, mod) % mod
 
-    ans = pow(p, t, mod)*n
-    return ans % mod
+    return [t, n]
