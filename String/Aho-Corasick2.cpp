@@ -4,7 +4,7 @@ vector<int> F;
 void aho_pre(vector<string>& S) { // 전처리, O(26*N)
     T = {vector<int>(27)}; //
     T[0][26] = -1; //
-    for1(j, S.size()) {
+    for(int j=0; j<S.size(); j++) {
         int i = 0;
         for(char c : S[j]) {
             int x = c-'a'; //
@@ -24,7 +24,7 @@ void aho_pre(vector<string>& S) { // 전처리, O(26*N)
     Q.push(0);
     while(!Q.empty()) {
         int s = Q.front(); Q.pop();
-        for1(x, 26) { //
+        for(int x=0; x<26; x++) { //
             int e = T[s][x];
             if(e == 0) continue;
             Q.push(e);
@@ -42,7 +42,7 @@ void aho_pre(vector<string>& S) { // 전처리, O(26*N)
 vector<int> aho_match(string& s) { // 매칭, O(M)
     int p = 0;
     vector<int> R(s.size());
-    for1(i, s.size()) {
+    for(int i=0; i<s.size(); i++) {
         int x = s[i]-'a'; //
         while(p && T[p][x] == 0) p = F[p];
         p = T[p][x];
