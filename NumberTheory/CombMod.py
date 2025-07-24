@@ -38,7 +38,7 @@ def comb_mod_prime(n, k, p):
     return [t, n]
 
 def fact_mod_primetower(n, p, e):
-    # this method is useful when p is small
+    # this method is useful when p^e is small
     # O(p^e + log n)
 
     # n! = p^M r
