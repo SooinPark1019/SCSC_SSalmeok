@@ -6,7 +6,7 @@ int DP[MAX+5];
 int down[MAX+5];
 int cycle[MAX+5];
 int cidx;
-
+//*****주의!!!!!!!!! 반드시!!!!!!!! lvl[root]=1 하고 해야 함!!!!!!!! 제발 봐줘!!!!! 놓치면 인생망한다!!!!*****
 void dfs(int cur_node, int p){
     DP[cur_node]=0;
     cycle[cur_node]=cur_node;
