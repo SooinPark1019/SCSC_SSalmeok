@@ -1,0 +1,15 @@
+stack<int> S;
+
+  for(int i=0; i<N; i++){
+      while(!S.empty()&&V[S.top()]<V[i]){
+          child[i][0]=S.top();
+          S.pop();
+      }
+      if(S.empty()){
+          root=i;
+      }
+      else{
+          child[S.top()][1]=i;
+      }
+      S.push(i);
+  }
