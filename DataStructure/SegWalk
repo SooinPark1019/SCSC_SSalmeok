@@ -1,0 +1,28 @@
+int find_leftans(int node, int start, int end, int index){
+    if(seg[node]!=0) return start;
+    if(start==end) return -1;
+    int mid=(start+end)>>1;
+    if(mid+1>index) return find_leftans(node*2, start, mid, index);
+    int a=find_leftans(node*2+1, mid+1, end, index);
+    if(a==mid+1){
+        int b=find_leftans(node*2, start, mid, index);
+        if(b==-1) return mid+1;
+        else return b;
+    }
+    else return a;
+}
+
+int find_rightans(int node, int start, int end, int index){
+    //cout << "node : " << node << " start : " << start << " end : " << end << " index : " << index << " seg : " << seg[node] << "\n";
+    if(seg[node]!=0) return end;
+    if(start==end) return -1;
+    int mid=(start+end)>>1;
+    if(mid<index) return find_rightans(node*2+1, mid+1, end, index);
+    int a=find_rightans(node*2, start, mid, index);
+    if(a==mid){
+        int b=find_rightans(node*2+1, mid+1, end, index);
+        if(b==-1) return mid;
+        else return b;
+    }
+    else return a;
+}
